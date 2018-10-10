@@ -1,0 +1,43 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+--Questao 1
+resolvePell(d:PI):List(INT) ==
+	y := 1
+	while ~integer?(sqrt(1 + d*(y^2))) repeat
+		y := y + 1
+	x := sqrt(1 + d*(y^2))
+	return ([x, y])
+paresPell := [resolvePell(d) for d in 2..20 by 1 | ~integer?(sqrt(d))]
+D := [d for d in 2..20 by 1 | ~integer?(sqrt(d))]
+
+-- Questao 2
+((x1^2 - d*(y1^2)) * (x2^2 - d*(y2^2)) - ((x1*x2 + d*y1*y2)^2 - d*(x1*y2 + y1*x2)^2))
+
+-- Questao 3
+produtoPell(d, P1, P2) ==
+	return ([P1.1*P2.1 + d*P1.2*P2.2, P1.1*P2.2 + P1.2*P2.1])
+
+-- Questao 4
+A := produtoPell(d, [x1, y1], produtoPell(d, [x2, y2], [x3, y3]))
+B := produtoPell(d, produtoPell(d, [x1, y1], [x2, y2]), [x3, y3])
+[A.1 - B.1, A.2 - B.2]
+
+-- Questao 5
+-- E = [1, 0]
+Q := produtoPell(d, [a, b], [x1, y1])
+S := [Q.1 - x1, Q.2 - y1]
+solve(S, [a, b])
+
+-- Questao 6
+Q := produtoPell(d, [x, y], [a, b])
+S := [Q.1 - 1, Q.2 - 0]
+solve(S, [a, b])
+
+-- Questao 7
+produto(d:PI, k:INT, P:List(INT)):List(INT) ==
+	if k = 0 then
+		[1, 0]
+	else
+		produtoPell(d, P, produto(d, k-1, P))
+R := [produto(D.d, 2, paresPell.d) for d in 1 .. #D]
