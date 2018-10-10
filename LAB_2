@@ -1,0 +1,52 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+potenciaRapida(b, k) == 
+    if k = 0 then
+        1
+    else
+        if rem(k, 2) = 0 then
+            potenciaRapida(b * b, quo(k, 2))
+        else
+            potenciaRapida(b * b, quo(k, 2))*b
+-- De acordo com a propriedade y elevado a w vezes y elevado a z é igual a y elevado a w + z:
+-- y elevado a w é igual a ((y elevado a (w/2)) vezes (y elevado a (w/2))), que é igual a ((y*y) elevado a (w/2)), caso y seja par.
+-- y elevado a w é igual a (y vezes ((y elevado a (w/2)) vezes (y elevado a (w/2)))), que é igual a y vezes ((y*y) elevado a (w/2)), caso y seja ímpar.
+
+-- A potenciaLenta tem um número de passos maior, pois o exponente decai de um em um, enquanto a potenciaRapida tem um número de passos menor, pois o exponente decai
+-- sendo dividido por 2 a cada vez.
+
+numeroFibonacci(n) ==
+    if n < 2 then
+        n
+    else
+        numeroFibonacci(n - 1) + numeroFibonacci(n - 2)
+
+
+-- Os resultados estão iguais.
+
+fatorial(n) ==
+    if n = 0 or n = 1 then
+        1
+    else
+        n * fatorial(n-1)
+
+primorial(p) ==
+    if p = 2 then
+        2
+    else
+        if p = prevPrime(p+1) then
+            p * primorial(prevPrime(p))
+        else
+            prevPrime(p) * primorial(prevPrime(prevPrime(p)))
+
+-- O maior número primo menor que p.
+-- A base é primorial(p) = 2 quando p for igual a 2 e os passos recursivos p * primorial(prevPrime(p)) quando p for primo e revPrime(p) * primorial(prevPrime(prevPrime(p))) quando p não for primo.
+
+mdc(a, b) ==
+    if rem(a, b) = 0 then
+        b
+    else
+        mdc(b, rem(a, b))
+
+-- A base é mdc(a, b) = b quando o resto da divisão entre a e b for igual a 0 e o passo recursivo mdc(b, rem(a, b)).
