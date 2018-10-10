@@ -1,0 +1,76 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+A := [j for j in 1..5000|odd?(j)]
+B := [j for j in 1..5000|zero?(rem(j,3))]
+C := [j for j in 1..5000|one?(rem(j,4))]
+D := [j for j in 1..5000|rem(j,4) = 3]
+E := [j for j in 1..5000|prime?(j)]
+
+L := [j for j in 2..10000 by 3|prime?(j)]
+M := [j for j in 3..10000 by 11|prime?(j)]
+N := [j for j in 3..10000 by 6|prime?(j)]
+
+--Estamos somando 3 com 6, um multiplo de 3, ou seja, nunca mais dara primo.
+
+contador := 0
+n := 0
+P(n) ==
+    return ((45872132836530 * n) + 468395662504823)
+
+L := [j for j in 0..500|~prime?(P(j))]
+
+--while prime?(P(n)) repeat
+--    contador := contador + 1
+--    n := n + 1
+--24
+
+F := [j for j in 1..5000|odd?(j) and ~prime?(j)]
+G := [j for j in 1..5000|prime?(j) and one?(rem(j,4))]
+H := [j for j in 1..5000|prime?(j) and (rem(j,4)) = 3]
+I := [j for j in 1..5000|prime?(j) or one?(rem(j,4))]
+J := [j for j in 1..5000|prime?(j) and prime?(j) and ~one?(rem(j,4))]
+
+-- Eles são iguais. Como (e) é ímpar, o resto não pode dar 2 e ele está limitado a não ter resto 1. Como a divisão é por 4, o resto só poderia ser 1, 2 ou 3. Sendo assim, ele
+-- está limitado ao resto 3 que nem (c).
+
+q(n) ==
+    return (n^2+1)
+
+K := [q(j) for j in 1..50|prime?(j)]
+
+p(n) ==
+    return (n^2 -79*n + 1601)
+
+O := [p(j) for j in 1..50|~prime?(j)]
+
+n := 1
+
+while prime?(p(n)) repeat
+    n := n + 1
+-- Não.
+-- 80
+
+polinomio(n) ==
+    return (36*n^2 - 810*n + 2753)
+
+Q := [polinomio(j) for j in 0..1000|~prime?(j)]
+
+
+n := 0
+
+while prime?(P(n)) and n <= 200 repeat
+    contador := contador + 1
+    n := n + 1
+--
+
+mersenne(n) ==
+    return (2^n - 1)
+
+X := [mersenne(j) for j in 1..257|prime?(j)]
+
+Prim(n) ==
+    if n = 2 then
+        return n
+    return Prim(prevPrime(n)) * n
+Z := [Prim(j) for j in 1..1000|prime?(j)]
