@@ -1,0 +1,27 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+parteInteiraRaizQuad(n:PI):PI ==
+    x:=n
+    y:= wholePart((n+1)/2)
+    while y < x repeat
+        x:=y
+        y:= wholePart((x^2+n)/(2*x))
+    return(x)
+    
+posicao(p:PI):PI ==
+    quo((p - 1),2)
+ 
+risca(p:PI,candidatos:List(INT)):List(INT) ==
+    for j in posicao(p^2)..#(candidatos) by p repeat
+        candidatos.j := 0
+    return candidatos
+
+crivo(n:PI):List(INT) ==
+    m := parteInteiraRaizQuad(n)
+    candidatos:List(INT) := [1 for j in 3..n | odd?(j)]
+    for p in 3..m by 1 | odd?(p) and candidatos.p = 1 repeat
+        risca(p, candidatos)
+    primos:List(INT) := [(j * 2) + 1 for j in 1..#(candidatos) | one?(candidatos.j)]
+    primos := cons(2, primos)
+    return primos
