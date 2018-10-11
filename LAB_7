@@ -1,0 +1,81 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+--Questao 2
+resolvePell(d) ==
+	y := 1
+	while ~integer?(sqrt(1 + d*(y^2))) repeat
+		y := y + 1
+	x := sqrt(1 + d*(y^2))
+	return ([x, y])
+
+solucoesPell(d, p) ==
+    x := resolvePell(d).1
+    y := resolvePell(d).2
+    pares := reduce(concat, [[[x, y] for x in 0..p-1] for y in 0..p-1])
+    for i in 1..#pares by 1 repeat
+        if rem(pares.i.1^2 - d*(pares.i.2^2), p) ~= 1 then
+            pares.i := [0, 0]
+    paresX := [pares.j for j in 1..#pares | ~zero?(pares.j.2)]
+	return paresX
+
+solucoesPell(2, 3)
+-- []
+
+solucoesPell(2, 5)
+-- [[3, 2]]
+
+solucoesPell(2, 7)
+-- [[3, 2], [4, 2]]
+
+solucoesPell(3, 5)
+-- [[2, 1], [3, 1]]
+
+solucoesPell(5, 11)
+-- [[9, 4]]
+
+solucoesPell(7, 13)
+-- [[9, 2], [8, 3]]
+	
+	
+--Questao 3
+produtoPell(d, P1, P2) ==
+    return ([P1.1*P2.1 + d*P1.2*P2.2, P1.1*P2.2 + P1.2*P2.1])
+
+A := produtoPell(d, [x1, y1], produtoPell(d, [x2, y2], [x3, y3]))
+B := produtoPell(d, produtoPell(d, [x1, y1], [x2, y2]), [x3, y3])
+[A.1 - B.1, A.2 - B.2]
+
+C := produtoPell(d, [x1, y1], [x2, y2])
+C' := produtoPell(d, [x2, y2], [x1, y1])
+[C.1 - C'.1, C.2 - C'.2]
+
+D := produtoPell(d, [x1, y1], [1, 0])
+[D.1 - x1, D.2 - y1]
+
+--Questao 4
+-- Continuam valendo, pois a congruência módulo n é uma relação de equivalência, portanto, ela
+-- atende as propriedades reflexiva, simétrica e transitiva, que foram provadas no exercício 3.
+
+--Questao 5
+produtoPell(d, [x1, y1], [x1, -y1]) = [1, 0]
+[rem(E.1, p), rem(E.2, p)]
+
+--Questao 6
+--S := solucoesPell(d, p)
+--P := S.1
+ordemPell(d, P, p) ==
+    k := 2
+    P1 := P
+    while rem(produtoPell(d, P1, P).1, p) ~= 1 or rem(produtoPell(d, P1, P).2, p) ~= 0 repeat
+        P := produtoPell(d, P1, P)
+        k := k + 1
+    return k
+
+ordemPell(2, [3,2], 7)
+ordemPell(2, [4,2], 7)
+ordemPell(3, [2,1], 5)
+ordemPell(3, [3,1], 5)
+ordemPell(5, [9,4], 11)
+ordemPell(7, [9,2], 13)
+ordemPell(7, [8, 3], 13)
