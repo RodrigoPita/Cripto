@@ -1,0 +1,56 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+--Questão 1
+testeFraco(n, b) ==
+    if powmod(b, n - 1, n) = 1 then
+        "Inconclusivo"
+    "Composto"
+
+--Questão 2
+F(n) ==
+    2^2^n + 1
+
+avaliaTesteFraco(n) ==
+    for i in 2..(F(n) - 2) repeat
+        if testeFraco(F(n), i) = "Composto" then
+            return "True"
+    return "False"
+
+--avaliaTesteFraco(13)
+--avaliaTesteFraco(15)
+
+--Questao 3
+psp(n, b) ==quant
+    if odd?(n) and ~prime?(n) and powmod(b, n - 1, n) = 1 then
+        true
+    else
+        false
+
+--Questão 4
+achaPsp(b, c) ==
+    [i for i in 1..c | psp(i, b) = true]
+
+quantPseudoPrimos := #achaPsp(2, 10^4)
+quantPrimos := #[i for i in 0..10^4|prime?(i)]
+--É mais provável que seja um primo, pois o número de pseudoprimos tem duas ordens de
+--grandeza a menos que o de primos, ou seja, menora  chance.
+
+--Questão 5
+menorPsp(L) ==
+    i := 3
+    count := 0
+    tam := #(L)
+    while ~zero?(count - tam) repeat
+        count := 0
+        i := i + 2
+        for j in 1..tam repeat
+            if psp(i, L.j) = true then
+                count := count + 1
+            output([i, count])
+    i
+
+--menorPsp([2, 3])
+--menorPsp([2, 3, 5])
+--menorPsp([2, 3, 5, 7])
+--menorPsp([2, 3, 5, 7, 11])
