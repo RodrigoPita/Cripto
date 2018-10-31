@@ -54,6 +54,7 @@ menorPspForte(L) ==
                 count := count + 1
             output([i, count])
     i
+    
 menorPsp(L) ==
     i := 3
     count := 0
