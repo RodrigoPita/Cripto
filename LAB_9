@@ -1,0 +1,73 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+--Questão 1
+testeForte(n, b) ==
+    aux := n - 1
+    k := 0
+    while even?(aux) repeat
+        aux := quo(aux, 2)
+        k := k + 1
+    q := aux
+    r := [powmod(b, q*(2^i), n) for i in 0..(k - 1)::NNI]
+    rTam := #(r)
+    for i in 1..rTam repeat
+        if r.i = (n - 1) then
+            return "Inconclusivo"
+        if r.i = 1 then
+            return "Composto"
+    if r.1 = 1 then
+        return "Inconclusivo"
+    else
+        return "Composto"
+
+--Questão 2
+pspForte(b, n) ==
+    if odd?(n) and ~prime?(n) and testeForte(n, b) = "Inconclusivo" then
+        true
+    else
+        false
+
+psp(n, b) ==
+    if odd?(n) and ~prime?(n) and powmod(b, n - 1, n) = 1 then
+        true
+    else
+        false
+        
+--Questao 3
+achaPspForte(b, c) ==
+    [i for i in 1..c | pspForte(b, i)]
+
+achaPsp(b, c) ==
+    [i for i in 1..c | psp(i, b) = true]
+
+--Questão 4
+menorPspForte(L) ==
+    i := 3
+    count := 0
+    tam := #(L)
+    while ~zero?(count - tam) repeat
+        count := 0
+        i := i + 2
+        for j in 1..tam repeat
+            if pspForte(L.j, i) = true then
+                count := count + 1
+            output([i, count])
+    i
+menorPsp(L) ==
+    i := 3
+    count := 0
+    tam := #(L)
+    while ~zero?(count - tam) repeat
+        count := 0
+        i := i + 2
+        for j in 1..tam repeat
+            if psp(i, L.j) = true then
+                count := count + 1
+            output([i, count])
+    i
+
+--menorPspForte([2, 3])
+--menorPspForte([2, 3, 5])
+--menorPspForte([2, 3, 5, 7])
+--menorPspForte([2, 3, 5, 7, 11])
