@@ -21,7 +21,7 @@ avaliaTesteFraco(n) ==
 --avaliaTesteFraco(15)
 
 --Questao 3
-psp(n, b) ==quant
+psp(n, b) ==
     if odd?(n) and ~prime?(n) and powmod(b, n - 1, n) = 1 then
         true
     else
