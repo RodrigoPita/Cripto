@@ -1,0 +1,37 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+--Questão 2
+produtoPellModular(d:PI, n:PI, P:List(INT), Q:List(INT)):List(INT) ==
+    Zn := IntegerMod(n)
+    P1:Zn:= P.1
+    P2:Zn:= P.2
+    Q1:Zn:= Q.1
+    Q2:Zn:= Q.2
+    d:Zn:= d
+    return ([P1*Q1 + d*P2*Q2, P1*Q2 + P2*Q1])
+
+--Questão 2
+potenciade2PellModular(d:PI, n:PI, k:PI, P:List(INT)):List(INT) ==
+    for i in 1..k repeat
+        P := produtoPellModular(d, n, P, P)
+        output(i)
+    return P
+
+--Questão 4
+mersennePrimo?(p:PI):Boolean ==
+    if ~prime?(p) then
+        return false
+    n := (2^p) - 1
+    Q := [2, 1]
+
+    Q := potenciade2PellModular(3, n, (p - 1), Q)
+    valEsperado := [2^p - 2, 0]
+    output([Q, valEsperado])
+    if Q.1 = valEsperado.1 and Q.2 = valEsperado.2 then
+        return true
+    else
+        return false
+
+--Questão 5
+--44.497
