@@ -1,0 +1,51 @@
+-- Júlia Clara Siqueira Lopez DRE: 114160392
+-- Rodrigo Côrtes Nogueira da Rocha Pita DRE: 118187443
+
+--Questão 2
+
+testeDeLucas(b:PI, n:PI):Boolean ==
+    Zn := IntegerMod(n)
+    f := n - 1
+    numFac := numberOfFactors(f)
+    aux:Zn:= b^f
+    if aux ~= 1 then
+        return false
+    for i in 1..numberOfFactors(f) repeat
+        aux2:Zn:= b^(quo(f,nthFactor(f, i)))
+        if aux2 = 1 then
+            return false
+    return true
+
+
+A := [i for i in 10^50..10^50 + 2000| prime?(i)]
+
+f := A.1 - 1
+
+factor(f)
+numberOfFactors(f)
+q1 := nthFactor(f, %)
+
+log10(q1)
+
+f1 := q1 - 1
+
+factor(f1)
+numberOfFactors(f1)
+q2 := nthFactor(f1, %)
+
+log10(q2)
+
+f2 := q2 - 1
+
+factor(f2)
+numberOfFactors(f2)
+q3 := nthFactor(f2, %)
+
+log10(q3)
+
+-- Pelo log11(q3) é possível ver que q3 < 10^14, logo a função prime?() 
+-- já será eficiente. 
+-- Sabendo que q3 é realmente primo, testamos então q2 no teste de Lucas
+-- Fizemos o mesmo processo até chegar ao próprio A.1 
+-- e descobrimos que é primo
+-- 100000000000000000000000000000000000000000000000151 é primo
