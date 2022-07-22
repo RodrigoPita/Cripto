@@ -1,4 +1,4 @@
-# Criptografia (Axion)
+# Criptografia (Axiom)
 Ciência da Computação - Numeros inteiros e Criptografia (2018.2)
 
 Professor: Severino Collier Coutinho (collier@dcc.ufrj.br)
