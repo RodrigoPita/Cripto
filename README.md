@@ -5,4 +5,6 @@ Professor: Severino Collier Coutinho (collier@dcc.ufrj.br)
 
 Monitor: Igor Carpanese (carpanese.igor@gmail.com)
 
-Site: http://www.dcc.ufrj.br/~collier/
+Site: 
+- http://www.dcc.ufrj.br/~collier/
+- http://axiom.axiom-developer.org/axiom-website/download.html
